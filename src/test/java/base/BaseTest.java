@@ -1,62 +1,65 @@
 package base;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.WebDriverConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
-
-import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static com.codeborne.selenide.Selenide.*;
 
 public class BaseTest {
 
-    private static final WebDriverConfig config = new WebDriverConfig();
-
     @BeforeAll
-    static void beforeAll() {
-        Configuration.baseUrl = "https://www.agima.ru";
-        Configuration.browserSize = config.getBrowserSize();
+    static void setUp() {
+        String browser = System.getProperty("browser", "chrome");
+        String browserVersion = System.getProperty("browserVersion", "");
+        String screenResolution = System.getProperty("screenResolution", "1920x1080");
+        String selenoidUrl = System.getProperty("selenoidUrl", "");
 
-        if (config.isRemote()) {
-            Configuration.browser = null; // Запрещаем Selenide создавать браузер
+        Configuration.browser = browser;
+        Configuration.baseUrl = "https://agima.ru";
+        Configuration.pageLoadStrategy = "eager";
 
-            ChromeOptions options = new ChromeOptions();
-            options.setCapability("selenoid:options", Map.of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-
-            try {
-                RemoteWebDriver driver = new RemoteWebDriver(
-                        new URL(config.getSelenoidUrl()), options);
-                WebDriverRunner.setWebDriver(driver);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException("Неправильный URL Selenoid: " + config.getSelenoidUrl(), e);
-            }
+        if (!browserVersion.isEmpty()) {
+            Configuration.browserVersion = browserVersion;
         }
-    }
 
-    @BeforeEach
-    void setUp() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        Configuration.browserSize = screenResolution;
+
+        if (!selenoidUrl.isEmpty()) {
+            Configuration.remote = selenoidUrl;
+        }
+
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(true));
+
+        System.out.println("=========================================");
+        System.out.println("=== Test Configuration ===");
+        System.out.println("Browser: " + browser);
+        System.out.println("Browser Version: " + (browserVersion.isEmpty() ? "default" : browserVersion));
+        System.out.println("Screen Resolution: " + screenResolution);
+        System.out.println("Selenoid URL: " + (selenoidUrl.isEmpty() ? "local" : selenoidUrl));
+        System.out.println("=========================================");
     }
 
     @AfterEach
-    void tearDown() {
+    void addAttachments() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         Attach.addVideo();
+
+        clearBrowserCookies();
+        clearBrowserLocalStorage();
+        closeWindow();
+    }
+
+    @AfterAll
+    static void globalTearDown() {
         closeWebDriver();
     }
 }

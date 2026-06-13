@@ -1,10 +1,31 @@
+# Gradle
 .gradle/
 build/
-!gradle/wrapper/gradle-wrapper.jar
+out/
+gradle-app.setting
+
+# IDEA
 .idea/
 *.iml
-.DS_Store
+*.iws
+*.ipr
+.idea_modules/
+
+# Java
+*.class
+*.log
+
+# Allure reports
 allure-results/
 allure-report/
-logs/
-*.log
+
+# Local configuration
+local.properties
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Notifications
+notifications/
+config.json

@@ -1,12 +1,10 @@
 package helpers;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.Selenide.sessionId;
@@ -44,14 +42,18 @@ public class Attach {
                 + "' type='video/mp4'></video></body></html>";
     }
 
-    public static URL getVideoUrl() {
-        String videoStorage = System.getProperty("selenoidUrl",
-                "https://user1:1234@selenoid.autotests.cloud");
-        try {
-            return new URL(videoStorage + "/video/" + sessionId() + ".mp4");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+    public static String getVideoUrl() {
+        String remoteHost = Configuration.remote;
+        if (remoteHost == null || remoteHost.isEmpty()) {
+            return "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
         }
-        return null;
+
+        remoteHost = remoteHost.replaceFirst("https://[^@]+@", "https://");
+
+        if (remoteHost.endsWith("/wd/hub")) {
+            remoteHost = remoteHost.substring(0, remoteHost.length() - "/wd/hub".length());
+        }
+
+        return remoteHost + "/video/" + sessionId() + ".mp4";
     }
 }
