@@ -62,7 +62,7 @@
 | `-DscreenResolution` | Разрешение экрана | `1920x1080` |
 | `-DselenoidUrl` | Адрес Selenoid | `https://user1:1234@...` |
 
-## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/Jenkins.svg"> Сборка в Jenkins
+## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/jenkins.svg"> Сборка в Jenkins
 
 Для запуска сборки необходимо перейти в раздел **Собрать с параметрами** и нажать кнопку **Собрать**.
 
@@ -80,7 +80,7 @@
 <img title="Allure Overview" src="media/screens/allure.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с Allure TestOps
+## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/allureTestOps.svg"> Интеграция с Allure TestOps
 
 На **Dashboard** в **Allure TestOps** видна статистика количества тестов: сколько из них добавлены и проходятся вручную, сколько автоматизированы.
 
@@ -89,7 +89,7 @@
 <img src="media/screens/testops2.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Telegram" src="media/logo/Telegram.svg"> Уведомления в Telegram
+## <img width="4%" style="vertical-align:middle" title="Telegram" src="media/logo/telegram.svg"> Уведомления в Telegram
 
 После завершения сборки специальный бот, созданный в **Telegram**, автоматически отправляет сообщение с отчётом о прогоне тестов.
 
@@ -108,7 +108,7 @@
 <img width="70%" title="Telegram Notifications" src="media/screens/bot.png">
 </p>
 
-## <img width="4%" style="vertical-align:middle" title="Selenoid" src="media/logo/Selenoid.svg"> Видео примера запуска тестов в Selenoid
+## <img width="4%" style="vertical-align:middle" title="Selenoid" src="media/logo/selenoid.svg"> Видео примера запуска тестов в Selenoid
 
 В отчетах Allure для каждого теста прикреплено видео прохождения теста.
 
