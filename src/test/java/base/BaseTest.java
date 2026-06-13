@@ -23,17 +23,14 @@ public class BaseTest {
         Configuration.browserVersion = config.getBrowserVersion();
         Configuration.browserSize = config.getBrowserSize();
         Configuration.baseUrl = "https://www.agima.ru";
+        Configuration.remote = config.getSelenoidUrl();
 
-        if (config.isRemote()) {
-            Configuration.remote = config.getSelenoidUrl();
-
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("selenoid:options", Map.of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-            Configuration.browserCapabilities = capabilities;
-        }
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 
     @BeforeEach
