@@ -2,14 +2,13 @@
 
 ## Содержание:
 
-- [Используемый стек](#computer-используемый-стек)
-- [Запуск автотестов](#arrow_forward-запуск-автотестов)
-- [Сборка в Jenkins](#-сборка-в-jenkins)
-- [Пример Allure-отчета](#-пример-allure-отчета)
-- [Интеграция с Allure TestOps](#-интеграция-с-allure-testops)
-- [Интеграция с Jira](#-интеграция-с-jira)
-- [Уведомления в Telegram](#-уведомления-в-telegram)
-- [Видео примера запуска тестов в Selenoid](#-видео-примера-запуска-тестов-в-selenoid)
+- [Используемый стек](#используемый-стек)
+- [Запуск автотестов](#запуск-автотестов)
+- [Сборка в Jenkins](#сборка-в-jenkins)
+- [Пример Allure-отчета](#пример-allure-отчета)
+- [Интеграция с Allure TestOps](#интеграция-с-allure-testops)
+- [Уведомления в Telegram](#уведомления-в-telegram)
+- [Видео примера запуска тестов в Selenoid](#видео-примера-запуска-тестов-в-selenoid)
 
 ## Используемый стек
 
@@ -25,7 +24,6 @@
 <img width="6%" title="GitHub" src="media/logo/gitHub.svg">
 <img width="6%" title="Jenkins" src="media/logo/jenkins.svg">
 <img width="6%" title="Telegram" src="media/logo/telegram.svg">
-<img width="5%" title="Jira" src="media/logo/jira.svg">
 </p>
 
 Тесты в данном проекте написаны на языке **Java** с использованием фреймворка для тестирования [Selenide](https://selenide.org/), сборщик — **Gradle**. **JUnit 5** задействован в качестве фреймворка модульного тестирования.
@@ -74,7 +72,7 @@
 
 После выполнения сборки откроется Allure-отчёт с результатами тестирования.
 
-## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/Allure_Report.svg"> Пример Allure-отчета
+## <img width="4%" style="vertical-align:middle" title="Allure Report" src="media/logo/allureReport.svg"> Пример Allure-отчета
 
 ### Overview
 
@@ -82,26 +80,13 @@
 <img title="Allure Overview" src="media/screens/allure.png">
 </p>
 
-### Результат выполнения автотеста
-
-<p align="center">
-<img title="Test Results" src="media/screens/allurResults.png">
-</p>
-
 ## <img width="4%" style="vertical-align:middle" title="Allure TestOps" src="media/logo/AllureTestOps.svg"> Интеграция с Allure TestOps
 
 На **Dashboard** в **Allure TestOps** видна статистика количества тестов: сколько из них добавлены и проходятся вручную, сколько автоматизированы.
 
 <p align="center">
-<img title="Allure TestOps Dashboard" src="media/screens/AllureTestOps.png">
-</p>
-
-## <img width="4%" style="vertical-align:middle" title="Jira" src="media/logo/Jira.svg"> Интеграция с Jira
-
-Реализована интеграция **Allure TestOps** с **Jira**, в тикете отображается, какие тест-кейсы были написаны в рамках задачи и результат их прогона.
-
-<p align="center">
-<img title="Jira Task" src="media/screens/Jira.png">
+<img title="Allure TestOps Dashboard" src="media/screens/testops.png">
+<img src="media/screens/testops2.png">
 </p>
 
 ## <img width="4%" style="vertical-align:middle" title="Telegram" src="media/logo/Telegram.svg"> Уведомления в Telegram
@@ -128,7 +113,7 @@
 В отчетах Allure для каждого теста прикреплено видео прохождения теста.
 
 <p align="center">
-  <img title="Selenoid Video" src="media/screens/Video.gif">
+  <img title="Selenoid Video" src="media/screens/video.gif">
 </p>
 
 ## 👨‍💻 Автор
