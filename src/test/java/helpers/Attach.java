@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
 import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.Selenide.sessionId;
@@ -44,6 +45,7 @@ public class Attach {
 
     public static String getVideoUrl() {
         String remoteHost = Configuration.remote;
+
         if (remoteHost == null || remoteHost.isEmpty()) {
             return "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
         }
