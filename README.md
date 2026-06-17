@@ -28,7 +28,9 @@
 
 Тесты в данном проекте написаны на языке **Java** с использованием фреймворка для тестирования [Selenide](https://selenide.org/), сборщик — **Gradle**. **JUnit 5** задействован в качестве фреймворка модульного тестирования.
 
-При прогоне тестов для запуска браузеров используется [Selenoid](https://aerokube.com/selenoid/). Для удаленного запуска реализована задача в **Jenkins** с формированием Allure-отчета и отправкой результатов в **Telegram** при помощи бота.
+При прогоне тестов для запуска браузеров используется [Selenoid](https://aerokube.com/selenoid/). Для удаленного запуска реализована задача в **Jenkins** с формированием Allure-отчета и отправкой результатов в **Telegram** при помощи бота. 
+
+⚙️ **Owner** — управление конфигурацией (браузер, версия, удалённый запуск).
 
 **Содержание Allure-отчета:**
 - Шаги теста
@@ -56,7 +58,7 @@
 | `-Dbrowser` | Браузер | `chrome`, `firefox` |
 | `-DbrowserVersion` | Версия браузера | `128.0` |
 | `-DisRemote` | Удалённый запуск | `true` |
-| `-DselenoidUrl` | Адрес Selenoid | `https://user1:1234@...` |
+| `-DremoteUrl` | Адрес Selenoid | `https://user1:1234@...` |
 
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/jenkins.svg"> Сборка в Jenkins
 
