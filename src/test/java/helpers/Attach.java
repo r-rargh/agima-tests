@@ -2,7 +2,9 @@ package helpers;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import config.WebDriverConfig;
 import io.qameta.allure.Attachment;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -44,18 +46,17 @@ public class Attach {
     }
 
     public static String getVideoUrl() {
-        String remoteHost = Configuration.remote;
+        WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
-        if (remoteHost == null || remoteHost.isEmpty()) {
-            return "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
+        if (!config.isRemote()) {
+            return null;
         }
 
+        String remoteHost = config.remoteUrl();
         remoteHost = remoteHost.replaceFirst("https://[^@]+@", "https://");
-
         if (remoteHost.endsWith("/wd/hub")) {
             remoteHost = remoteHost.substring(0, remoteHost.length() - "/wd/hub".length());
         }
-
         return remoteHost + "/video/" + sessionId() + ".mp4";
     }
 }

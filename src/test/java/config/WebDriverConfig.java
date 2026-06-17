@@ -1,24 +1,26 @@
 package config;
 
-public class WebDriverConfig {
+import org.aeonbits.owner.Config;
 
-    public String getBrowser() {
-        return System.getProperty("browser", "chrome");
-    }
+@Config.Sources({
+        "file:src/test/resources/webdriver.properties",
+        "system:properties"
+})
+public interface WebDriverConfig extends Config {
 
-    public String getBrowserVersion() {
-        return System.getProperty("browserVersion", "128.0");
-    }
+    @Key("browser")
+    @DefaultValue("chrome")
+    String browser();
 
-    public String getBrowserSize() {
-        return System.getProperty("screenResolution", "1920x1080");
-    }
+    @Key("browserVersion")
+    @DefaultValue("")
+    String browserVersion();
 
-    public String getSelenoidUrl() {
-        return System.getProperty("selenoidUrl");
-    }
+    @Key("remoteUrl")
+    @DefaultValue("")
+    String remoteUrl();
 
-    public boolean isRemote() {
-        return getSelenoidUrl() != null;
-    }
+    @Key("isRemote")
+    @DefaultValue("false")
+    boolean isRemote();
 }

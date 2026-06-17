@@ -2,14 +2,13 @@ package base;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.WebDriverConfig;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
 
@@ -17,32 +16,20 @@ public class BaseTest {
 
     @BeforeAll
     static void setUp() {
-        String browser = System.getProperty("browser", "chrome");
-        String browserVersion = System.getProperty("browserVersion", "");
-        String screenResolution = System.getProperty("screenResolution", "1920x1080");
-        String selenoidUrl = System.getProperty("selenoidUrl", "");
+        WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
-        Configuration.browser = browser;
+        Configuration.browser = config.browser();
+
+        if (!config.browserVersion().isEmpty()) {
+            Configuration.browserVersion = config.browserVersion();
+        }
+
+        if (config.isRemote()) {
+            Configuration.remote = config.remoteUrl();
+        }
+
         Configuration.baseUrl = "https://agima.ru";
         Configuration.pageLoadStrategy = "eager";
-
-        if (!browserVersion.isEmpty()) {
-            Configuration.browserVersion = browserVersion;
-        }
-
-        Configuration.browserSize = screenResolution;
-
-        if (!selenoidUrl.isEmpty()) {
-            Configuration.remote = selenoidUrl;
-
-            // ВКЛЮЧАЕМ ВИДЕО В SELENOID
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("selenoid:options", Map.of(
-                    "enableVNC", true,
-                    "enableVideo", true
-            ));
-            Configuration.browserCapabilities = capabilities;
-        }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
@@ -50,10 +37,10 @@ public class BaseTest {
 
         System.out.println("=========================================");
         System.out.println("=== Test Configuration ===");
-        System.out.println("Browser: " + browser);
-        System.out.println("Browser Version: " + (browserVersion.isEmpty() ? "default" : browserVersion));
-        System.out.println("Screen Resolution: " + screenResolution);
-        System.out.println("Selenoid URL: " + (selenoidUrl.isEmpty() ? "local" : selenoidUrl));
+        System.out.println("Browser: " + config.browser());
+        System.out.println("Browser Version: " + (config.browserVersion().isEmpty() ? "default" : config.browserVersion()));
+        System.out.println("Remote: " + config.isRemote());
+        System.out.println("Remote URL: " + (config.isRemote() ? config.remoteUrl() : "local"));
         System.out.println("=========================================");
     }
 
