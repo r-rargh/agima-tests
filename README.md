@@ -60,6 +60,7 @@
 | `-DisRemote` | Удалённый запуск | `true` |
 | `-DremoteUrl` | Адрес Selenoid | `https://user1:1234@...` |
 
+<a name="jenkins"></a>
 ## <img width="4%" style="vertical-align:middle" title="Jenkins" src="media/logo/jenkins.svg"> Сборка в Jenkins
 
 Для запуска сборки необходимо перейти в раздел **Собрать с параметрами** и нажать кнопку **Собрать**.
